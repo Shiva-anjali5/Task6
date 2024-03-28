@@ -1,17 +1,34 @@
-pipeline {
+pipeline
+{
     agent any
-    tools {
-        // Use the Maven installation configured in Jenkins
-        maven 'Maven'
-    }
-    stages {
-        stage('Build') {
+    
+    stages
+    {
+        stage("Checkout") {
             steps {
-                // Execute Maven commands
-                sh 'mvn --version'
+                git branch: 'main', url: 'https://github.com/Shiva-anjali5/Task6'
             }
         }
-        // Add more stages as needed
+        stage("Build")
+        {
+            steps
+            {
+                bat 'mvn clean'
+            }
+        }
+        stage("Test")
+        {
+            steps
+            {
+                bat 'mvn test'
+            }
+        }
+        stage("Deploy")
+        {
+            steps
+            {
+                echo "Deployed Successfully"
+            }
+        }
     }
 }
-
