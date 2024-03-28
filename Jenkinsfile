@@ -1,33 +1,22 @@
-pipeline
-{
+pipeline {
     agent any
-    
-    stages
-    {
-        stage("Checkout") {
+    stages {
+        stage('Build') {
             steps {
-                git branch: 'main', url: 'https://github.com/Shiva-anjali5/Task6.git'
+                // Use Maven installation from the specified directory
+                sh 'C:\\Users\\Admin\\Downloads\\apache-maven-3.9.6-bin\\apache-maven-3.9.6\\bin\\mvn clean package'
             }
         }
-        stage("Build")
-        {
-            steps
-            {
-                bat 'mvn clean'
+        stage('Test') {
+            steps {
+                // Use Maven installation from the specified directory
+                sh 'C:\\Users\\Admin\\Downloads\\apache-maven-3.9.6-bin\\apache-maven-3.9.6\\bin\\mvn test'
             }
         }
-        stage("Test")
-        {
-            steps
-            {
-                bat 'mvn test'
-            }
-        }
-        stage("Deploy")
-        {
-            steps
-            {
-                echo "Deployed Successfully"
+        stage('Deploy') {
+            steps {
+                // Use Maven installation from the specified directory
+                sh 'C:\\Users\\Admin\\Downloads\\apache-maven-3.9.6-bin\\apache-maven-3.9.6\\bin\\mvn deploy'
             }
         }
     }
